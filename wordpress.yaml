@@ -8,6 +8,13 @@
     url: https://wordpress.org/wordpress-{{ wordpress_version }}.tar.gz
     dest: /tmp/wordpress-{{ wordpress_version }}.tar.gz
     mode: '0440'
+- name: Install telnet
+  when: 
+    - ansible_facts['distribution'] == "Ubuntu" 
+    - ansible_facts['distribution_version'] == "16.04"
+  ansible.builtin.package:
+      name: telnet
+      state: present
 - name: Ensure group "devops" exists
   when: 
   - ansible_facts['distribution'] == "Ubuntu" 
